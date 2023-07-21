@@ -11,8 +11,19 @@ from lib.tg_notifier import TGNotifier
 
 PREFERENCES = {
     "USDT": 0,
-    "BNB": 100,
-    "LTC": 1,
+    "BNB": 75,
+    "ETH": 50,
+    "XRP": 50,
+    "ADA": 50,
+    "SOL": 50,
+    "DOGE": 50,
+    "TRX": 50,
+    "MATIC": 50,
+    "LTC": 50,
+    "DOT": 50,
+    "AVAX": 50,
+    "WBTC": 50,
+    "BCH": 50,
 }
 
 
