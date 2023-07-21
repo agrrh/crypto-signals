@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 from lib.provider import Provider
 from lib.manager import Manager
@@ -41,13 +42,15 @@ def main():
 
     ok = manager.update_rates(currency_list=w_actual.currencies.keys())
     if not ok:
-        logging.fatal("could not get rates initially")
+        logging.error("could not get rates initially")
+        sys.exit()
 
     w_reference = manager.generate_reference_wallet(wallet=w_actual)
 
     taxes_null = Taxes()
 
-    logging.info("starting loop")
+    logging.info("starting observation loop")
+    notifier.send("starting observation loop")
 
     while True:
         ok = manager.update_rates(currency_list=w_actual.currencies.keys())
@@ -57,7 +60,7 @@ def main():
                 wallet_actual=w_actual, wallet_reference=w_reference, taxes=taxes_null
             )
             exchange = manager.choose_exchange(exchanges=good_exchanges)
-            notifier.send(exchange=exchange, exchanges=good_exchanges)
+            notifier.send_exchanges(exchange=exchange, exchanges=good_exchanges)
 
         logging.debug("waiting before next iteration")
         manager.take_a_break()

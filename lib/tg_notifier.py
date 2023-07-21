@@ -17,7 +17,10 @@ class TGNotifier(BaseModel):
         results = requests.get(url_req)
         return results.json()
 
-    def send(self, exchange: Exchange, exchanges: List[Exchange]) -> None:
+    def send(self, text) -> None:
+        return self.__tg_api_call(text)
+
+    def send_exchanges(self, exchange: Exchange, exchanges: List[Exchange]) -> None:
         if not exchange:
             return None
 
