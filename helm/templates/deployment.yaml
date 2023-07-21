@@ -42,11 +42,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.app.tg.secretName }}
-                  key: {{ .Values.app.tg.secretKey }}
-            - name: APP_NATS_ADDR
-              value: {{ .Values.app.nats.addr }}
-            - name: APP_NATS_PREFIX
-              value: {{ .Values.app.nats.prefix }}
+                  key: {{ .Values.app.tg.tokenKey }}
+            - name: APP_TG_CHAT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.tg.secretName }}
+                  key: {{ .Values.app.tg.chatKey }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
